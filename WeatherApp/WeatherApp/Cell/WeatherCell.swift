@@ -19,6 +19,7 @@ class WeatherCell: UICollectionViewCell {
     private lazy var dateLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
+        label.font = UIFont.systemFont(ofSize: 20, weight: .medium)
         label.textAlignment = .center
         return label
     }()
@@ -91,7 +92,7 @@ class WeatherCell: UICollectionViewCell {
         ])
     }
     public func configureCell(weather: DailyForecast) {
-        dateLabel.text = weather.time.convertTime()
+        dateLabel.text = weather.time.convertDate()
         lowTempLabel.text = "low: \(weather.temperatureLow)°F"
         highTempLabel.text = "high: \(weather.temperatureHigh )°F"
         imageView.image = UIImage(named: "\(weather.icon)")
@@ -100,7 +101,7 @@ class WeatherCell: UICollectionViewCell {
 }
 
 extension Double {
-    func convertTime() -> String {
+    func convertDate() -> String {
         let date = Date(timeIntervalSince1970: self)
         let dateFormatter = DateFormatter()
         dateFormatter.timeStyle = DateFormatter.Style.medium
@@ -109,5 +110,13 @@ extension Double {
         let localDate = dateFormatter.string(from: date)
         return localDate
     }
-    
+    func convertTime() -> String {
+        let date = Date(timeIntervalSince1970: self)
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeStyle = DateFormatter.Style.medium
+        dateFormatter.dateFormat = "h:mm a"
+        dateFormatter.timeZone = .current
+        let localDate = dateFormatter.string(from: date)
+        return localDate
+    }
 }

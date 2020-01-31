@@ -11,9 +11,7 @@ import UIKit
 class WeatherSearchViewController: UIViewController {
 
     private var weatherSearchView = WeatherSearchView()
-    
-    //private var weather: Weather?
-    
+        
     private var weeklyWeather = [DailyForecast]() {
         didSet {
             DispatchQueue.main.async {
@@ -40,6 +38,7 @@ class WeatherSearchViewController: UIViewController {
         weatherSearchView.collectionView.register(WeatherCell.self, forCellWithReuseIdentifier: "WeatherCell")
         zipCode = "10002"
     }
+    
     public func getCoordinates(zipcode: String) {
         ZipCodeHelper.getLatLong(fromZipCode: zipCode) { [weak self] (result) in
             switch result {
@@ -57,6 +56,14 @@ class WeatherSearchViewController: UIViewController {
                 print("getWeather error: \(appError)")
             case .success(let dailyForecast):
                 self?.weeklyWeather = dailyForecast.daily.data
+                DispatchQueue.main.async {
+                    let seperated = dailyForecast.timezone.components(separatedBy: "/")
+                    let withUnderScore = seperated.last
+                    let removedUnderScore = withUnderScore?.components(separatedBy: "_")
+                    let city = removedUnderScore?.joined(separator: " ")
+                    self?.weatherSearchView.cityNameLabel.text = "Weather in \(city ?? "")"
+                    self?.weatherSearchView.summaryLabel.text = dailyForecast.daily.summary
+                }
             }
         }
     }
@@ -85,6 +92,12 @@ extension WeatherSearchViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 20, left: 1, bottom: 20, right: 1)
     }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let day = weeklyWeather[indexPath.row]
+        let detailVC = DetailVC()
+        detailVC.dayForecast = day
+        navigationController?.pushViewController(detailVC, animated: true)
+    }
 }
 extension WeatherSearchViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -100,6 +113,5 @@ extension WeatherSearchViewController: UICollectionViewDataSource {
         cell.configureCell(weather: forecast)
         return cell
  }
-    
     
 }

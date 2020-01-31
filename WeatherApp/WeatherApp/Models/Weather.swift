@@ -22,8 +22,8 @@ struct DailyForecast: Codable {
     let summary: String?
     let time: Double
     let icon: String
-    let sunriseTime: Int
-    let sunsetTime: Int
+    let sunriseTime: Double
+    let sunsetTime: Double
     let precipProbability: Double
     let precipType: String?
     let temperatureHigh: Double

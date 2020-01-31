@@ -14,7 +14,14 @@ class WeatherSearchView: UIView {
         let label = UILabel()
         label.text = "Your city's Weekly Forecast"
         label.textAlignment = .center
-        label.font = UIFont(name: "Helvetica", size: 20)
+        label.font = UIFont.systemFont(ofSize: 20, weight: .bold)
+        return label
+    }()
+    public var summaryLabel: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .center
+        label.font = UIFont.systemFont(ofSize: 20, weight: .regular)
+        label.textColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
         return label
     }()
     public var collectionView: UICollectionView = {
@@ -43,6 +50,7 @@ class WeatherSearchView: UIView {
     }
     private func commonInit() {
         setupCityLabelConstraints()
+        setupSummaryLabelConstraints()
         setupCollectionViewConstraints()
         setupTextBoxConstraints()
     }
@@ -57,12 +65,22 @@ class WeatherSearchView: UIView {
             cityNameLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20)
         ])
     }
+    private func setupSummaryLabelConstraints() {
+        addSubview(summaryLabel)
+        summaryLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            summaryLabel.topAnchor.constraint(equalTo: cityNameLabel.bottomAnchor, constant: 20),
+            summaryLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
+            summaryLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20)
+        ])
+    }
     private func setupCollectionViewConstraints() {
         addSubview(collectionView)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: cityNameLabel.bottomAnchor, constant: 20),
+            collectionView.topAnchor.constraint(equalTo: summaryLabel.bottomAnchor, constant: 20),
             collectionView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),
             collectionView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
             collectionView.heightAnchor.constraint(equalToConstant: 300)
