@@ -87,20 +87,20 @@ class WeatherCell: UICollectionViewCell {
         ])
     }
     public func configureCell(weather: DailyForecast) {
-        lowTempLabel.text = "low: \(weather.temperatureLow )°F"
-        highTempLabel.text = "high: \(weather.temperatureHigh )°F"
-        imageView.getImage(with: weather.icon ) { [weak self] (result) in
-            switch result {
-            case .failure:
-                DispatchQueue.main.async {
-                    self?.imageView.image = UIImage(systemName: "sun.max")
-                }
-            case .success(let image):
-                DispatchQueue.main.async {
-                    self?.imageView.image = image
-                }
-            }
-        }
+        lowTempLabel.text = "low: \(weather.temperatureLow)°F"
+//        highTempLabel.text = "high: \(weather.temperatureHigh )°F"
+//        imageView.getImage(with: weather.icon ) { [weak self] (result) in
+//            switch result {
+//            case .failure:
+//                DispatchQueue.main.async {
+//                    self?.imageView.image = UIImage(systemName: "sun.max")
+//                }
+//            case .success(let image):
+//                DispatchQueue.main.async {
+//                    self?.imageView.image = image
+//                }
+//            }
+//        }
         
     }
 }

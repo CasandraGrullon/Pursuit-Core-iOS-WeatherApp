@@ -12,12 +12,15 @@ class WeatherSearchViewController: UIViewController {
 
     private var weatherSearchView = WeatherSearchView()
     
-    private var weather: Weather? {
+    private var weather: Weather?
+    
+    private var weeklyWeather = [DailyForecast]() {
         didSet {
             DispatchQueue.main.async {
                 self.weatherSearchView.collectionView.reloadData()
             }
         }
+
     }
     private var zipCode = String() {
         didSet {
@@ -55,6 +58,7 @@ class WeatherSearchViewController: UIViewController {
                 print("getWeather error: \(appError)")
             case .success(let dailyForecast):
                 self?.weather = dailyForecast
+                self?.weeklyWeather = dailyForecast.daily.data
             }
         }
     }
@@ -87,13 +91,10 @@ extension WeatherSearchViewController: UICollectionViewDataSource {
         guard let cell = weatherSearchView.collectionView.dequeueReusableCell(withReuseIdentifier: "WeatherCell", for: indexPath) as? WeatherCell else {
             fatalError("could not cast as WeatherCell")
         }
-//        guard let forecast = weather?.daily.data[indexPath.row] else {
-//
-//            fatalError("could not get forecast")
-//        }
-        //cell.configureCell(weather: forecast)
+        let forecast = weeklyWeather[indexPath.row]
+        cell.configureCell(weather: forecast)
         return cell
-    }
+ }
     
     
 }
