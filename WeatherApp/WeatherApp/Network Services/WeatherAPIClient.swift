@@ -10,7 +10,7 @@ import Foundation
 import NetworkHelper
 
 struct WeatherAPIClient {
-    static func getWeather(lat: Double, long: Double, completion: @escaping (Result<Weather, AppError>) -> () ) {
+    static func getWeather(lat: Double, long: Double, completion: @escaping (Result<[DailyForecast], AppError>) -> () ) {
         let endpointUrl = "https://api.darksky.net/forecast/\(Secrets.darkSkyKey)/\(lat),\(long)"
         guard let url = URL(string: endpointUrl) else {
             completion(.failure(.badURL(endpointUrl)))
@@ -25,7 +25,7 @@ struct WeatherAPIClient {
             case .success(let data):
                 do {
                     let results = try JSONDecoder().decode(Weather.self, from: data)
-                    completion(.success(results))
+                    completion(.success(results.daily.data))
                 } catch {
                     completion(.failure(.decodingError(error)))
                 }
