@@ -13,6 +13,7 @@ class WeatherCell: UICollectionViewCell {
  
     private lazy var imageView: UIImageView = {
         let image = UIImageView()
+        image.contentMode = .scaleAspectFit
         return image
     }()
     private lazy var dateLabel: UILabel = {
@@ -63,7 +64,9 @@ class WeatherCell: UICollectionViewCell {
         NSLayoutConstraint.activate([
             imageView.topAnchor.constraint(equalTo: dateLabel.bottomAnchor, constant: 10),
             imageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
-            imageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8)
+            imageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8),
+            imageView.heightAnchor.constraint(equalToConstant: 60),
+            imageView.widthAnchor.constraint(equalToConstant: 60)
         ])
     }
     private func setupLowTempConstraints() {
@@ -88,19 +91,8 @@ class WeatherCell: UICollectionViewCell {
     }
     public func configureCell(weather: DailyForecast) {
         lowTempLabel.text = "low: \(weather.temperatureLow)°F"
-//        highTempLabel.text = "high: \(weather.temperatureHigh )°F"
-//        imageView.getImage(with: weather.icon ) { [weak self] (result) in
-//            switch result {
-//            case .failure:
-//                DispatchQueue.main.async {
-//                    self?.imageView.image = UIImage(systemName: "sun.max")
-//                }
-//            case .success(let image):
-//                DispatchQueue.main.async {
-//                    self?.imageView.image = image
-//                }
-//            }
-//        }
-        
+        highTempLabel.text = "high: \(weather.temperatureHigh )°F"
+        imageView.image = UIImage(named: "\(weather.icon)")
     }
 }
+

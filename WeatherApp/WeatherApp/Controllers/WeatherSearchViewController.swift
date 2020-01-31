@@ -38,6 +38,7 @@ class WeatherSearchViewController: UIViewController {
         weatherSearchView.collectionView.dataSource = self
         weatherSearchView.textField.delegate = self
         weatherSearchView.collectionView.register(WeatherCell.self, forCellWithReuseIdentifier: "WeatherCell")
+        zipCode = "10002"
     }
     public func getCoordinates(zipcode: String) {
         ZipCodeHelper.getLatLong(fromZipCode: zipCode) { [weak self] (result) in
@@ -45,8 +46,6 @@ class WeatherSearchViewController: UIViewController {
             case .failure(let zipcodeError):
                 print("getCoordinates error: \(zipcodeError)")
             case .success(let coordinates):
-                //self?.weather?.latitude = coordinates.lat
-                //self?.weather?.longitude = coordinates.long
                 self?.getWeather(lat: coordinates.lat, long: coordinates.long)
             }
         }
@@ -57,7 +56,6 @@ class WeatherSearchViewController: UIViewController {
             case .failure(let appError):
                 print("getWeather error: \(appError)")
             case .success(let dailyForecast):
-                //self?.weather = dailyForecast
                 self?.weeklyWeather = dailyForecast.daily.data
             }
         }
@@ -73,13 +71,19 @@ extension WeatherSearchViewController: UITextFieldDelegate {
 }
 extension WeatherSearchViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let maxSize: CGFloat = UIScreen.main.bounds.size.width
-        let itemWidth: CGFloat = maxSize * 0.25
-        return CGSize(width: itemWidth, height: itemWidth/2)
+        let itemSpacing: CGFloat = 0.2
+        let maxWidth = UIScreen.main.bounds.size.width
+        let numberOfItems: CGFloat = 1
+        let totalSpace: CGFloat = numberOfItems * itemSpacing
+        let itemWidth: CGFloat = (maxWidth - totalSpace) / numberOfItems
+        return CGSize(width: itemWidth/3, height: itemWidth/2)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 1
+    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 20, left: 1, bottom: 20, right: 1)
     }
 }
 extension WeatherSearchViewController: UICollectionViewDataSource {
@@ -92,6 +96,7 @@ extension WeatherSearchViewController: UICollectionViewDataSource {
             fatalError("could not cast as WeatherCell")
         }
         let forecast = weeklyWeather[indexPath.row]
+        cell.backgroundColor = .white
         cell.configureCell(weather: forecast)
         return cell
  }
