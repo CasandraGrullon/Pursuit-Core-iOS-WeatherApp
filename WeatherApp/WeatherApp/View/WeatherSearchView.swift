@@ -52,7 +52,7 @@ class WeatherSearchView: UIView {
         cityNameLabel.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            cityNameLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 100),
+            cityNameLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 20),
             cityNameLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
             cityNameLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20)
         ])
@@ -62,10 +62,10 @@ class WeatherSearchView: UIView {
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: cityNameLabel.bottomAnchor, constant: 50),
+            collectionView.topAnchor.constraint(equalTo: cityNameLabel.bottomAnchor, constant: 20),
             collectionView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),
             collectionView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
-            collectionView.heightAnchor.constraint(equalToConstant: 200)
+            collectionView.heightAnchor.constraint(equalToConstant: 300)
         ])
     }
     private func setupTextBoxConstraints() {

@@ -76,7 +76,7 @@ extension WeatherSearchViewController: UICollectionViewDelegateFlowLayout {
         let numberOfItems: CGFloat = 1
         let totalSpace: CGFloat = numberOfItems * itemSpacing
         let itemWidth: CGFloat = (maxWidth - totalSpace) / numberOfItems
-        return CGSize(width: itemWidth/3, height: itemWidth/2)
+        return CGSize(width: itemWidth/3, height: itemWidth/1.5)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {

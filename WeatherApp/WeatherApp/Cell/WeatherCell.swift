@@ -10,7 +10,7 @@ import UIKit
 import ImageKit
 
 class WeatherCell: UICollectionViewCell {
- 
+    
     private lazy var imageView: UIImageView = {
         let image = UIImageView()
         image.contentMode = .scaleAspectFit
@@ -18,16 +18,19 @@ class WeatherCell: UICollectionViewCell {
     }()
     private lazy var dateLabel: UILabel = {
         let label = UILabel()
+        label.numberOfLines = 0
         label.textAlignment = .center
         return label
     }()
     private lazy var lowTempLabel: UILabel = {
         let label = UILabel()
+        label.textColor = #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1)
         label.textAlignment = .center
         return label
     }()
     private lazy var highTempLabel: UILabel = {
         let label = UILabel()
+        label.textColor = #colorLiteral(red: 0.7450980544, green: 0.1568627506, blue: 0.07450980693, alpha: 1)
         label.textAlignment = .center
         return label
     }()
@@ -62,11 +65,9 @@ class WeatherCell: UICollectionViewCell {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            imageView.topAnchor.constraint(equalTo: dateLabel.bottomAnchor, constant: 10),
+            imageView.topAnchor.constraint(equalTo: dateLabel.bottomAnchor, constant: 50),
             imageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
             imageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8),
-            imageView.heightAnchor.constraint(equalToConstant: 60),
-            imageView.widthAnchor.constraint(equalToConstant: 60)
         ])
     }
     private func setupLowTempConstraints() {
@@ -74,7 +75,7 @@ class WeatherCell: UICollectionViewCell {
         lowTempLabel.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            lowTempLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 10),
+            lowTempLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 50),
             lowTempLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8),
             lowTempLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8)
         ])
@@ -90,9 +91,23 @@ class WeatherCell: UICollectionViewCell {
         ])
     }
     public func configureCell(weather: DailyForecast) {
+        dateLabel.text = weather.time.convertTime()
         lowTempLabel.text = "low: \(weather.temperatureLow)°F"
         highTempLabel.text = "high: \(weather.temperatureHigh )°F"
         imageView.image = UIImage(named: "\(weather.icon)")
     }
+    
 }
 
+extension Double {
+    func convertTime() -> String {
+        let date = Date(timeIntervalSince1970: self)
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeStyle = DateFormatter.Style.medium
+        dateFormatter.dateFormat = "MM/dd/yyyy"
+        dateFormatter.timeZone = .current
+        let localDate = dateFormatter.string(from: date)
+        return localDate
+    }
+    
+}

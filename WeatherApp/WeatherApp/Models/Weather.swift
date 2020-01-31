@@ -20,6 +20,7 @@ struct Daily: Codable {
 }
 struct DailyForecast: Codable {
     let summary: String?
+    let time: Double
     let icon: String
     let sunriseTime: Int
     let sunsetTime: Int
