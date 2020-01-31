@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import ImageKit
 
 class WeatherCell: UICollectionViewCell {
  
@@ -85,5 +86,21 @@ class WeatherCell: UICollectionViewCell {
             highTempLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8)
         ])
     }
-    //private func configureCell(forecast:  )
+    public func configureCell(weather: DailyForecast) {
+        lowTempLabel.text = "low: \(weather.temperatureLow )°F"
+        highTempLabel.text = "high: \(weather.temperatureHigh )°F"
+        imageView.getImage(with: weather.icon ) { [weak self] (result) in
+            switch result {
+            case .failure:
+                DispatchQueue.main.async {
+                    self?.imageView.image = UIImage(systemName: "sun.max")
+                }
+            case .success(let image):
+                DispatchQueue.main.async {
+                    self?.imageView.image = image
+                }
+            }
+        }
+        
+    }
 }

@@ -29,6 +29,7 @@ class WeatherSearchView: UIView {
         textBox.backgroundColor = #colorLiteral(red: 0.870795846, green: 0.8656198382, blue: 0.8747749329, alpha: 1)
         textBox.placeholder = "enter your zipcode here"
         textBox.textAlignment = .center
+        textBox.keyboardType = .numbersAndPunctuation
         return textBox
     }()
     
@@ -72,7 +73,7 @@ class WeatherSearchView: UIView {
         textField.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            textField.topAnchor.constraint(equalTo: collectionView.bottomAnchor, constant: 100),
+            textField.topAnchor.constraint(equalTo: collectionView.bottomAnchor, constant: 20),
             textField.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 100),
             textField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -100),
             textField.heightAnchor.constraint(equalToConstant: 50)

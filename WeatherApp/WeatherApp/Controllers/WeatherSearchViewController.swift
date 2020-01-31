@@ -12,9 +12,8 @@ class WeatherSearchViewController: UIViewController {
 
     private var weatherSearchView = WeatherSearchView()
     
-    private var weather: Weather?
-    private var forecast = [DailyForecast](){
-        didSet{
+    private var weather: Weather? {
+        didSet {
             DispatchQueue.main.async {
                 self.weatherSearchView.collectionView.reloadData()
             }
@@ -35,7 +34,6 @@ class WeatherSearchViewController: UIViewController {
         weatherSearchView.collectionView.delegate = self
         weatherSearchView.collectionView.dataSource = self
         weatherSearchView.textField.delegate = self
-        getWeather(lat: weather?.latitude ?? 0.0, long: weather?.longitude ?? 0.0)
         weatherSearchView.collectionView.register(WeatherCell.self, forCellWithReuseIdentifier: "WeatherCell")
     }
     public func getCoordinates(zipcode: String) {
@@ -46,6 +44,7 @@ class WeatherSearchViewController: UIViewController {
             case .success(let coordinates):
                 self?.weather?.latitude = coordinates.lat
                 self?.weather?.longitude = coordinates.long
+                self?.getWeather(lat: self?.weather?.latitude ?? 0, long: self?.weather?.longitude ?? 0)
             }
         }
     }
@@ -55,15 +54,17 @@ class WeatherSearchViewController: UIViewController {
             case .failure(let appError):
                 print("getWeather error: \(appError)")
             case .success(let dailyForecast):
-                self?.forecast = dailyForecast
+                self?.weather = dailyForecast
             }
         }
     }
 
 }
 extension WeatherSearchViewController: UITextFieldDelegate {
-    func textFieldDidChangeSelection(_ textField: UITextField) {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.text = zipCode
+        textField.resignFirstResponder()
+        return true
     }
 }
 extension WeatherSearchViewController: UICollectionViewDelegateFlowLayout {
@@ -86,7 +87,11 @@ extension WeatherSearchViewController: UICollectionViewDataSource {
         guard let cell = weatherSearchView.collectionView.dequeueReusableCell(withReuseIdentifier: "WeatherCell", for: indexPath) as? WeatherCell else {
             fatalError("could not cast as WeatherCell")
         }
-        
+//        guard let forecast = weather?.daily.data[indexPath.row] else {
+//
+//            fatalError("could not get forecast")
+//        }
+        //cell.configureCell(weather: forecast)
         return cell
     }
     
