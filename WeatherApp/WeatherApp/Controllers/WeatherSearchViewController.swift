@@ -12,7 +12,7 @@ class WeatherSearchViewController: UIViewController {
 
     private var weatherSearchView = WeatherSearchView()
     
-    private var weather: Weather?
+    //private var weather: Weather?
     
     private var weeklyWeather = [DailyForecast]() {
         didSet {
@@ -45,9 +45,9 @@ class WeatherSearchViewController: UIViewController {
             case .failure(let zipcodeError):
                 print("getCoordinates error: \(zipcodeError)")
             case .success(let coordinates):
-                self?.weather?.latitude = coordinates.lat
-                self?.weather?.longitude = coordinates.long
-                self?.getWeather(lat: self?.weather?.latitude ?? 0, long: self?.weather?.longitude ?? 0)
+                //self?.weather?.latitude = coordinates.lat
+                //self?.weather?.longitude = coordinates.long
+                self?.getWeather(lat: coordinates.lat, long: coordinates.long)
             }
         }
     }
@@ -57,7 +57,7 @@ class WeatherSearchViewController: UIViewController {
             case .failure(let appError):
                 print("getWeather error: \(appError)")
             case .success(let dailyForecast):
-                self?.weather = dailyForecast
+                //self?.weather = dailyForecast
                 self?.weeklyWeather = dailyForecast.daily.data
             }
         }
@@ -66,7 +66,7 @@ class WeatherSearchViewController: UIViewController {
 }
 extension WeatherSearchViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.text = zipCode
+        zipCode = textField.text ?? ""
         textField.resignFirstResponder()
         return true
     }
@@ -84,7 +84,7 @@ extension WeatherSearchViewController: UICollectionViewDelegateFlowLayout {
 }
 extension WeatherSearchViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 7
+        return weeklyWeather.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
