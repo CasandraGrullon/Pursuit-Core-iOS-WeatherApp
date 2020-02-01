@@ -9,6 +9,10 @@
 import UIKit
 import AVFoundation
 
+protocol FavoritesDelegate: AnyObject {
+    func didAddToFaves(pic: Picture)
+}
+
 class DetailVC: UIViewController {
     
     public var dayForecast: DailyForecast?
@@ -16,6 +20,8 @@ class DetailVC: UIViewController {
     private var detailView = DetailView()
     private var addedToFaves = true
     public var persistenceHelper = PersistenceHelper(filename: "weatherAppFavorites.plist")
+    
+    weak var delegate: FavoritesDelegate?
     
     override func loadView() {
         view = detailView
@@ -59,18 +65,21 @@ class DetailVC: UIViewController {
             return
         }
         let faved = Picture(largeImageURL: favorited.largeImageURL)
-        let filledHeart = UIImage(systemName: "heart.filled")
-        let emptyHeart = UIImage(systemName: "heart")
-        
-        addedToFaves.toggle()
-        
-        if addedToFaves == true {
-            sender.setBackgroundImage(filledHeart, for: .normal, barMetrics: .compactPrompt)
-        } else {
-            sender.setBackgroundImage(emptyHeart, for: .normal, barMetrics: .compactPrompt)
-        }
+//        let filledHeart = UIImage(systemName: "heart.filled")
+//        let emptyHeart = UIImage(systemName: "heart")
+//
+//        addedToFaves.toggle()
+//
+//        if addedToFaves == true {
+//            sender.setBackgroundImage(filledHeart, for: .normal, barMetrics: .compactPrompt)
+//        } else {
+//            sender.setBackgroundImage(emptyHeart, for: .normal, barMetrics: .compactPrompt)
+//        }
         do {
             try persistenceHelper.create(photo: faved)
+            delegate?.didAddToFaves(pic: faved)
+            let favoritesVC = FavoritesViewController()
+            favoritesVC.favePics = [faved]
         } catch {
             print("cannot be saved \(error)")
         }

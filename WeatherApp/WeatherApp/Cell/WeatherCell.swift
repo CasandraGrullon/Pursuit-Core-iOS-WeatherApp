@@ -70,7 +70,7 @@ class WeatherCell: UICollectionViewCell {
         NSLayoutConstraint.activate([
             imageView.topAnchor.constraint(equalTo: dateLabel.bottomAnchor, constant: 50),
             imageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
-            imageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8),
+            imageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8)
         ])
     }
     private func setupLowTempConstraints() {

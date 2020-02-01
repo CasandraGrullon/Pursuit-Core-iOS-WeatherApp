@@ -2,38 +2,32 @@
 //  FavoritesCell.swift
 //  WeatherApp
 //
-//  Created by casandra grullon on 1/31/20.
+//  Created by casandra grullon on 2/1/20.
 //  Copyright © 2020 David Rifkin. All rights reserved.
 //
 
 import UIKit
+import ImageKit
 
-class FavoritesCell: UICollectionViewCell {
-    public lazy var imageView: UIImageView = {
-        let image = UIImageView()
-        image.contentMode = .scaleAspectFit
-        return image
-    }()
-    override init(frame: CGRect) {
-        super.init(frame: UIScreen.main.bounds)
-        commonInit()
+class FavoritesCell: UITableViewCell {
+
+    
+    @IBOutlet weak var cellImageView: UIImageView!
+    
+    
+    public func congigureCell(for fave: Picture) {
+        cellImageView.getImage(with: fave.largeImageURL ) { [weak self] (result) in
+            switch result {
+            case .failure:
+                DispatchQueue.main.async {
+                    self?.cellImageView.image = UIImage(systemName: "heart.circle")
+                }
+            case .success(let image):
+                DispatchQueue.main.async {
+                    self?.cellImageView.image = image
+                }
+            }
+        }
     }
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        commonInit()
-    }
-    private func commonInit() {
-        imageviewConstraints()
-    }
-    private func imageviewConstraints() {
-        addSubview(imageView)
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            imageView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
-            imageView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            imageView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            imageView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor)
-        ])
-    }
+
 }
