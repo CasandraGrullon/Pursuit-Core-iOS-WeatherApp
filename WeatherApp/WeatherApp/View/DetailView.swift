@@ -12,50 +12,59 @@ class DetailView: UIView {
     
     public lazy var dayLabel: UILabel = {
         let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 24, weight: .medium)
         label.textAlignment = .center
         return label
     }()
     public lazy var imageView: UIImageView = {
         let image = UIImageView()
-        image.contentMode = .scaleAspectFit
+        image.contentMode = .scaleAspectFill
         return image
     }()
     public lazy var summaryLabel: UILabel = {
         let label = UILabel()
+        label.numberOfLines = 0
+        label.font = UIFont.systemFont(ofSize: 20, weight: .medium)
         label.textAlignment = .center
         return label
     }()
     public lazy var lowTempLabel: UILabel = {
         let label = UILabel()
+        label.textColor = #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1)
         label.textAlignment = .center
         return label
     }()
     public lazy var highTempLabel: UILabel = {
         let label = UILabel()
+        label.textColor = #colorLiteral(red: 0.7450980544, green: 0.1568627506, blue: 0.07450980693, alpha: 1)
         label.textAlignment = .center
         return label
     }()
     public lazy var sunriseLabel: UILabel = {
         let label = UILabel()
+        label.textColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
         label.textAlignment = .center
         return label
     }()
     public lazy var sunsetLabel: UILabel = {
         let label = UILabel()
+        label.textColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
         label.textAlignment = .center
         return label
     }()
     public lazy var precipLabel: UILabel = {
         let label = UILabel()
+        label.textColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
         label.textAlignment = .center
         return label
     }()
     public lazy var windspeedLabel: UILabel = {
         let label = UILabel()
+        label.textColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
         label.textAlignment = .center
         return label
     }()
-    
+
     override init(frame: CGRect) {
         super.init(frame: UIScreen.main.bounds)
         commonInit()
@@ -93,7 +102,7 @@ class DetailView: UIView {
             imageView.topAnchor.constraint(equalTo: dayLabel.bottomAnchor, constant: 10),
             imageView.leadingAnchor.constraint(equalTo: leadingAnchor),
             imageView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            imageView.heightAnchor.constraint(equalToConstant: 350)
+            imageView.heightAnchor.constraint(equalToConstant: 400)
         ])
     }
     private func summaryLabelConstraints() {
@@ -103,7 +112,7 @@ class DetailView: UIView {
         NSLayoutConstraint.activate([
             summaryLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 10),
             summaryLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
-            summaryLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 10)
+            summaryLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10)
         ])
     }
     private func lowTempConstraints() {

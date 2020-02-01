@@ -19,19 +19,21 @@ class WeatherCell: UICollectionViewCell {
     private lazy var dateLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
-        label.font = UIFont.systemFont(ofSize: 20, weight: .medium)
+        label.font = UIFont.systemFont(ofSize: 17, weight: .medium)
         label.textAlignment = .center
         return label
     }()
     private lazy var lowTempLabel: UILabel = {
         let label = UILabel()
         label.textColor = #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1)
+        label.font = UIFont.systemFont(ofSize: 17, weight: .medium)
         label.textAlignment = .center
         return label
     }()
     private lazy var highTempLabel: UILabel = {
         let label = UILabel()
         label.textColor = #colorLiteral(red: 0.7450980544, green: 0.1568627506, blue: 0.07450980693, alpha: 1)
+        label.font = UIFont.systemFont(ofSize: 17, weight: .medium)
         label.textAlignment = .center
         return label
     }()
@@ -105,7 +107,7 @@ extension Double {
         let date = Date(timeIntervalSince1970: self)
         let dateFormatter = DateFormatter()
         dateFormatter.timeStyle = DateFormatter.Style.medium
-        dateFormatter.dateFormat = "MM/dd/yyyy"
+        dateFormatter.dateFormat = "MMMM dd, yyyy"
         dateFormatter.timeZone = .current
         let localDate = dateFormatter.string(from: date)
         return localDate

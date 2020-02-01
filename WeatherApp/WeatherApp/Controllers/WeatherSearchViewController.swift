@@ -37,7 +37,7 @@ class WeatherSearchViewController: UIViewController {
         weatherSearchView.collectionView.dataSource = self
         weatherSearchView.textField.delegate = self
         weatherSearchView.collectionView.register(WeatherCell.self, forCellWithReuseIdentifier: "WeatherCell")
-        zipCode = "10002"
+        zipCode = UserPreference.shared.getZipcode() ?? ""
     }
     
     public func getCoordinates(zipcode: String) {
@@ -84,6 +84,7 @@ class WeatherSearchViewController: UIViewController {
 extension WeatherSearchViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         zipCode = textField.text ?? ""
+        UserPreference.shared.updateZipcode(with: zipCode)
         textField.resignFirstResponder()
         return true
     }
