@@ -10,7 +10,11 @@ import UIKit
 
 class FavoritesViewController: UIViewController {
 
+    private var favoritesView = FavoritesView()
     
+    override func loadView() {
+        view = favoritesView
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
