@@ -18,8 +18,9 @@ class WeatherSearchViewController: UIViewController {
                 self.weatherSearchView.collectionView.reloadData()
             }
         }
-
     }
+    private var photo = [Picture]()
+    
     private var zipCode = String() {
         didSet {
             getCoordinates(zipcode: zipCode)
@@ -63,11 +64,22 @@ class WeatherSearchViewController: UIViewController {
                     let city = removedUnderScore?.joined(separator: " ")
                     self?.weatherSearchView.cityNameLabel.text = "Weather in \(city ?? "")"
                     self?.weatherSearchView.summaryLabel.text = dailyForecast.daily.summary
+                    self?.loadPhotoData(photo: city ?? "")
                 }
             }
         }
     }
 
+    public func loadPhotoData(photo: String) {
+        PhotoAPIClient.getPhotoJournals(for: photo) { [weak self] (result) in
+            switch result {
+            case .failure(let photoError):
+                print(photoError)
+            case .success(let picture):
+                self?.photo = picture
+            }
+        }
+    }
 }
 extension WeatherSearchViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -96,6 +108,7 @@ extension WeatherSearchViewController: UICollectionViewDelegateFlowLayout {
         let day = weeklyWeather[indexPath.row]
         let detailVC = DetailVC()
         detailVC.dayForecast = day
+        detailVC.picture = photo[indexPath.row]
         navigationController?.pushViewController(detailVC, animated: true)
     }
 }
