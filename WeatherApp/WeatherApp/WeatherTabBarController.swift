@@ -18,7 +18,6 @@ class WeatherTabBarController: UITabBarController {
     }()
     private lazy var favoritesVC: FavoritesViewController = {
         let vc = FavoritesViewController()
-        vc.view.backgroundColor = #colorLiteral(red: 0.1019607857, green: 0.2784313858, blue: 0.400000006, alpha: 1)
         vc.tabBarItem = UITabBarItem(title: "Favorites", image: UIImage(systemName: "heart"), tag: 1)
         return vc
     }()

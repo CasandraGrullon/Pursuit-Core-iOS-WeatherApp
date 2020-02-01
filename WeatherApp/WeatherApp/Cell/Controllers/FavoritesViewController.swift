@@ -10,12 +10,11 @@ import UIKit
 
 class FavoritesViewController: UIViewController {
 
-    @IBOutlet weak var tableView: UITableView!
     private var detailVC = DetailVC()
     public var favePics = [Picture]() {
         didSet {
             DispatchQueue.main.async {
-                self.tableView.reloadData()
+                
             }
         }
     }
@@ -24,7 +23,6 @@ class FavoritesViewController: UIViewController {
         super.viewDidLoad()
         detailVC.delegate = self
         loadFavorites()
-        tableView.dataSource = self
     }
     
     private func loadFavorites() {
@@ -37,21 +35,7 @@ class FavoritesViewController: UIViewController {
 
 }
 
-extension FavoritesViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return favePics.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "favoritesCell", for: indexPath) as? FavoritesCell else {
-            fatalError("could not cast to favorites cell")
-        }
-        let fave = favePics[indexPath.row]
-        cell.congigureCell(for: fave)
-        return cell
-    }
-    
-}
+
 
 extension FavoritesViewController: FavoritesDelegate {
     func didAddToFaves(pic: Picture) {
