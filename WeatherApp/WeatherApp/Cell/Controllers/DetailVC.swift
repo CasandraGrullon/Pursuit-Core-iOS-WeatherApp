@@ -17,6 +17,7 @@ class DetailVC: UIViewController {
     
     public var dayForecast: DailyForecast?
     public var picture: Picture?
+    //private var favoritesVC = FavoritesViewController()
     private var detailView = DetailView()
     private var addedToFaves = true
     public var persistenceHelper = PersistenceHelper(filename: "weatherAppFavorites.plist")
@@ -75,11 +76,14 @@ class DetailVC: UIViewController {
 //        } else {
 //            sender.setBackgroundImage(emptyHeart, for: .normal, barMetrics: .compactPrompt)
 //        }
+        
+
         do {
             try persistenceHelper.create(photo: faved)
+            
             delegate?.didAddToFaves(pic: faved)
-            let favoritesVC = FavoritesViewController()
-            favoritesVC.favePics = [faved]
+
+            
         } catch {
             print("cannot be saved \(error)")
         }

@@ -10,18 +10,21 @@ import UIKit
 
 class FavoritesCell: UICollectionViewCell {
     
-//    public func congigureCell(for fave: Picture) {
-//        cellImageView.getImage(with: fave.largeImageURL ) { [weak self] (result) in
-//            switch result {
-//            case .failure:
-//                DispatchQueue.main.async {
-//                    self?.cellImageView.image = UIImage(systemName: "heart.circle")
-//                }
-//            case .success(let image):
-//                DispatchQueue.main.async {
-//                    self?.cellImageView.image = image
-//                }
-//            }
-//        }
-//    }
+    @IBOutlet weak var cellImageView: UIImageView!
+    
+    
+    public func congigureCell(for fave: Picture) {
+        cellImageView.getImage(with: fave.largeImageURL ) { [weak self] (result) in
+            switch result {
+            case .failure:
+                DispatchQueue.main.async {
+                    self?.cellImageView.image = UIImage(systemName: "heart.circle")
+                }
+            case .success(let image):
+                DispatchQueue.main.async {
+                    self?.cellImageView.image = image
+                }
+            }
+        }
+    }
 }

@@ -23,6 +23,7 @@
 		C64A184E23E38203001F43BF /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64A184D23E38203001F43BF /* FavoritesViewController.swift */; };
 		C68D789F23E5ECFB00466C6E /* FavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C68D789E23E5ECFB00466C6E /* FavoritesView.swift */; };
 		C68D78A523E5EFB700466C6E /* FavoritesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C68D78A423E5EFB700466C6E /* FavoritesCell.swift */; };
+		C68D78A723E5F51000466C6E /* FavoritesCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C68D78A623E5F51000466C6E /* FavoritesCell.xib */; };
 		C6A002B923E3697A003C644F /* Picture.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6A002B823E3697A003C644F /* Picture.swift */; };
 		C6A002BB23E36999003C644F /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6A002BA23E36999003C644F /* Secrets.swift */; };
 		C6A002C123E36A90003C644F /* PhotoAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6A002C023E36A90003C644F /* PhotoAPIClient.swift */; };
@@ -62,6 +63,7 @@
 		C64A184D23E38203001F43BF /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
 		C68D789E23E5ECFB00466C6E /* FavoritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesView.swift; sourceTree = "<group>"; };
 		C68D78A423E5EFB700466C6E /* FavoritesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesCell.swift; sourceTree = "<group>"; };
+		C68D78A623E5F51000466C6E /* FavoritesCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FavoritesCell.xib; sourceTree = "<group>"; };
 		C6A002B823E3697A003C644F /* Picture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Picture.swift; sourceTree = "<group>"; };
 		C6A002BA23E36999003C644F /* Secrets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
 		C6A002C023E36A90003C644F /* PhotoAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoAPIClient.swift; sourceTree = "<group>"; };
@@ -191,6 +193,7 @@
 			children = (
 				C6B7999E23E388F10016E558 /* WeatherCell.swift */,
 				C68D78A423E5EFB700466C6E /* FavoritesCell.swift */,
+				C68D78A623E5F51000466C6E /* FavoritesCell.xib */,
 				C6A002BF23E36A78003C644F /* Controllers */,
 			);
 			path = Cell;
@@ -294,6 +297,7 @@
 			files = (
 				548CE05E234D33B600B5177D /* LaunchScreen.storyboard in Resources */,
 				548CE068234D340700B5177D /* Assets.xcassets in Resources */,
+				C68D78A723E5F51000466C6E /* FavoritesCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
