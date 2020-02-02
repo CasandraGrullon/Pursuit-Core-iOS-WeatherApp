@@ -9,19 +9,20 @@
 import UIKit
 
 class FavoritesViewController: UIViewController {
-
+    
     public var favoritesView = FavoritesView()
     
     private var detailVC = DetailVC()
+    
     
     public var favePics = [Picture]() {
         didSet {
             DispatchQueue.main.async {
                 self.favoritesView.collectionView.reloadData()
-                self.loadFavorites()
             }
         }
     }
+    
     override func loadView() {
         view = favoritesView
     }
@@ -46,7 +47,7 @@ class FavoritesViewController: UIViewController {
             print("could not load faves")
         }
     }
-
+    
 }
 
 extension FavoritesViewController: UICollectionViewDataSource {
@@ -74,20 +75,11 @@ extension FavoritesViewController: UICollectionViewDelegateFlowLayout {
 }
 
 extension FavoritesViewController: FavoritesDelegate {
-    func didAddToFaves(pic: Picture) {
-        var currentIndex = 0
-        if favePics.isEmpty {
-            favePics.insert(pic, at: currentIndex)
-            let indexPath = IndexPath(row: currentIndex, section: currentIndex)
-            favoritesView.collectionView.insertItems(at: [indexPath])
-        } else {
-            currentIndex += 1
-            favePics.insert(pic, at: currentIndex)
-            let indexPath = IndexPath(row: currentIndex, section: currentIndex)
-            favoritesView.collectionView.insertItems(at: [indexPath])
-        }
-
+    func didAddToFaves(pic: Picture, indexpath: IndexPath) {
+        favePics.insert(pic, at: 0)
+        favoritesView.collectionView.insertItems(at: [indexpath])
 
     }
-
+    
+    
 }
