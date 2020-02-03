@@ -49,6 +49,10 @@ class WeatherSearchViewController: UIViewController {
                 print("getCoordinates error: \(zipcodeError)")
             case .success(let coordinates):
                 self?.getWeather(lat: coordinates.lat, long: coordinates.long)
+                DispatchQueue.main.async {
+                    self?.weatherSearchView.cityNameLabel.text = coordinates.placeName
+                    self?.loadPhotoData(photo: coordinates.placeName)
+                }
             }
         }
     }
@@ -60,13 +64,7 @@ class WeatherSearchViewController: UIViewController {
             case .success(let dailyForecast):
                 self?.weeklyWeather = dailyForecast.daily.data
                 DispatchQueue.main.async {
-                    let seperated = dailyForecast.timezone.components(separatedBy: "/")
-                    let withUnderScore = seperated.last
-                    let removedUnderScore = withUnderScore?.components(separatedBy: "_")
-                    let city = removedUnderScore?.joined(separator: " ")
-                    self?.weatherSearchView.cityNameLabel.text = "Weather in \(city ?? "")"
                     self?.weatherSearchView.summaryLabel.text = dailyForecast.daily.summary
-                    self?.loadPhotoData(photo: city ?? "")
                 }
             }
         }
