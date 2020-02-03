@@ -12,8 +12,8 @@ class FavoritesViewController: UIViewController {
     
     public var favoritesView = FavoritesView()
     
-    private var detailVC = DetailVC()
-    
+    //private var detailVC = DetailVC()
+    public var persistenceHelper: PersistenceHelper!
     
     public var favePics = [Picture]() {
         didSet {
@@ -29,7 +29,7 @@ class FavoritesViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        detailVC.delegate = self
+        //detailVC.delegate = self
         favoritesView.collectionView.delegate = self
         favoritesView.collectionView.dataSource = self
         loadFavorites()
@@ -42,7 +42,7 @@ class FavoritesViewController: UIViewController {
     
     private func loadFavorites() {
         do {
-            favePics = try detailVC.persistenceHelper.loadPhotos()
+            favePics = try persistenceHelper.loadPhotos()
         } catch {
             print("could not load faves")
         }
@@ -72,12 +72,17 @@ extension FavoritesViewController: UICollectionViewDelegateFlowLayout {
         let itemWidth: CGFloat = maxSize.width * 0.95 // 95%
         return CGSize(width: itemWidth, height: itemWidth)
     }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 1, left: 1, bottom: 1, right: 1)
+    }
 }
 
 extension FavoritesViewController: FavoritesDelegate {
-    func didAddToFaves(pic: Picture, indexpath: IndexPath) {
-        favePics.insert(pic, at: 0)
-        favoritesView.collectionView.insertItems(at: [indexpath])
+    func didAddToFaves(pic: Picture) {
+        favePics.append(pic)
 
     }
     

@@ -21,6 +21,8 @@ class WeatherSearchViewController: UIViewController {
     }
     private var photo = [Picture]()
     
+    public var persistenceHelper: PersistenceHelper!
+    
     private var zipCode = String() {
         didSet {
             getCoordinates(zipcode: zipCode)
@@ -110,6 +112,7 @@ extension WeatherSearchViewController: UICollectionViewDelegateFlowLayout {
         let detailVC = DetailVC()
         detailVC.dayForecast = day
         detailVC.picture = photo[indexPath.row]
+        detailVC.persistenceHelper = persistenceHelper
         navigationController?.pushViewController(detailVC, animated: true)
     }
 }

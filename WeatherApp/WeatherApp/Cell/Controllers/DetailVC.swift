@@ -10,19 +10,20 @@ import UIKit
 import AVFoundation
 
 protocol FavoritesDelegate: AnyObject {
-    func didAddToFaves(pic: Picture, indexpath: IndexPath)
+    func didAddToFaves(pic: Picture)
 }
 
 class DetailVC: UIViewController {
     
     public var dayForecast: DailyForecast?
     public var picture: Picture?
-    public var persistenceHelper = PersistenceHelper(filename: "weatherAppFavorites.plist")
+    
     private var detailView = DetailView()
     private var addedToFaves = true
-    
-    
+
     weak var delegate: FavoritesDelegate?
+    
+    public var persistenceHelper: PersistenceHelper!
     
     override func loadView() {
         view = detailView
@@ -76,8 +77,8 @@ class DetailVC: UIViewController {
 //        } else {
 //            sender.setBackgroundImage(emptyHeart, for: .normal, barMetrics: .compactPrompt)
 //        }
-        let indexPath = IndexPath(row: 0, section: 0)
-        delegate?.didAddToFaves(pic: faved, indexpath: indexPath)
+        
+        delegate?.didAddToFaves(pic: faved)
         do {
             try persistenceHelper.create(photo: faved)
         } catch {
