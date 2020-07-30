@@ -19,6 +19,7 @@ class WeatherTabBarController: UITabBarController {
         viewcontroller.persistenceHelper = persistenceHelper
         return viewcontroller
     }()
+    
     private lazy var favoritesVC: FavoritesViewController = {
         let vc = FavoritesViewController()
         vc.tabBarItem = UITabBarItem(title: "Favorites", image: UIImage(systemName: "heart"), tag: 1)

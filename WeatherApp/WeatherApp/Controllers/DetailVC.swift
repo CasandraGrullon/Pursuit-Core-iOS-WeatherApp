@@ -67,16 +67,6 @@ class DetailVC: UIViewController {
             return
         }
         let faved = Picture(largeImageURL: favorited.largeImageURL)
-//        let filledHeart = UIImage(systemName: "heart.filled")
-//        let emptyHeart = UIImage(systemName: "heart")
-//
-//        addedToFaves.toggle()
-//
-//        if addedToFaves == true {
-//            sender.setBackgroundImage(filledHeart, for: .normal, barMetrics: .compactPrompt)
-//        } else {
-//            sender.setBackgroundImage(emptyHeart, for: .normal, barMetrics: .compactPrompt)
-//        }
         
         delegate?.didAddToFaves(pic: faved)
         do {

@@ -29,7 +29,6 @@ class FavoritesViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //detailVC.delegate = self
         favoritesView.collectionView.delegate = self
         favoritesView.collectionView.dataSource = self
         loadFavorites()
