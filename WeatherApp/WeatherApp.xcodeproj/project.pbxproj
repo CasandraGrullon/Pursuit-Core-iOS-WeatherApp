@@ -14,6 +14,7 @@
 		548CE066234D33E600B5177D /* ZipCodeHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 548CE065234D33E600B5177D /* ZipCodeHelper.swift */; };
 		548CE068234D340700B5177D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 548CE067234D340700B5177D /* Assets.xcassets */; };
 		C604622123E4DA9C006610D1 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C604622023E4DA9C006610D1 /* DetailView.swift */; };
+		C6116E0624D30E700076F1D1 /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6116E0524D30E700076F1D1 /* Secrets.swift */; };
 		C614150323E5133E00A38717 /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C614150223E5133E00A38717 /* FileManager.swift */; };
 		C614150623E513A100A38717 /* PersistenceHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C614150523E513A100A38717 /* PersistenceHelper.swift */; };
 		C614150823E5149500A38717 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = C614150723E5149500A38717 /* UserDefaults.swift */; };
@@ -53,6 +54,7 @@
 		548CE065234D33E600B5177D /* ZipCodeHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZipCodeHelper.swift; sourceTree = "<group>"; };
 		548CE067234D340700B5177D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C604622023E4DA9C006610D1 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
+		C6116E0524D30E700076F1D1 /* Secrets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
 		C614150223E5133E00A38717 /* FileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManager.swift; sourceTree = "<group>"; };
 		C614150523E513A100A38717 /* PersistenceHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceHelper.swift; sourceTree = "<group>"; };
 		C614150723E5149500A38717 /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
@@ -113,6 +115,7 @@
 		548CE050234D33B500B5177D /* WeatherApp */ = {
 			isa = PBXGroup;
 			children = (
+				C6116E0424D30E5E0076F1D1 /* Secrets */,
 				548CE051234D33B500B5177D /* AppDelegate.swift */,
 				548CE053234D33B500B5177D /* SceneDelegate.swift */,
 				C64A184A23E37D61001F43BF /* WeatherTabBarController.swift */,
@@ -126,6 +129,14 @@
 				548CE05F234D33B600B5177D /* Info.plist */,
 			);
 			path = WeatherApp;
+			sourceTree = "<group>";
+		};
+		C6116E0424D30E5E0076F1D1 /* Secrets */ = {
+			isa = PBXGroup;
+			children = (
+				C6116E0524D30E700076F1D1 /* Secrets.swift */,
+			);
+			path = Secrets;
 			sourceTree = "<group>";
 		};
 		C614150423E5134600A38717 /* Data Persistance */ = {
@@ -305,6 +316,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C68D789F23E5ECFB00466C6E /* FavoritesView.swift in Sources */,
+				C6116E0624D30E700076F1D1 /* Secrets.swift in Sources */,
 				C64A184E23E38203001F43BF /* FavoritesViewController.swift in Sources */,
 				C6A002C623E36B1E003C644F /* Weather.swift in Sources */,
 				C6A002C123E36A90003C644F /* PhotoAPIClient.swift in Sources */,
