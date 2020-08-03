@@ -9,32 +9,31 @@
 import UIKit
 
 class WeatherSearchView: UIView {
-
-    public var cityNameLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Your city's Weekly Forecast"
-        label.textAlignment = .center
-        label.font = UIFont.systemFont(ofSize: 20, weight: .bold)
-        return label
-    }()
+    
+    public var summaryLabelTopAnchor: NSLayoutConstraint?
+    
+    override func layoutSubviews() {
+        self.backgroundColor = #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1)
+        textField.layer.cornerRadius = 13
+    }
     public var summaryLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
         label.numberOfLines = 0
         label.font = UIFont.systemFont(ofSize: 20, weight: .regular)
-        label.textColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
+        label.textColor = .white
         return label
     }()
     public var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         let cv = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
-        cv.backgroundColor = #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1)
+        cv.backgroundColor = .clear 
         return cv
     }()
     public var textField: UITextField = {
        let textBox = UITextField()
-        textBox.backgroundColor = #colorLiteral(red: 0.870795846, green: 0.8656198382, blue: 0.8747749329, alpha: 1)
+        textBox.backgroundColor = .white
         textBox.placeholder = "enter your zipcode here"
         textBox.textAlignment = .center
         textBox.keyboardType = .numbersAndPunctuation
@@ -50,38 +49,29 @@ class WeatherSearchView: UIView {
         commonInit()
     }
     private func commonInit() {
-        setupCityLabelConstraints()
         setupSummaryLabelConstraints()
         setupCollectionViewConstraints()
         setupTextBoxConstraints()
-    }
-    
-    private func setupCityLabelConstraints() {
-        addSubview(cityNameLabel)
-        cityNameLabel.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            cityNameLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 20),
-            cityNameLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
-            cityNameLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20)
-        ])
     }
     private func setupSummaryLabelConstraints() {
         addSubview(summaryLabel)
         summaryLabel.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            summaryLabel.topAnchor.constraint(equalTo: cityNameLabel.bottomAnchor, constant: 20),
+            summaryLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 20),
             summaryLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
             summaryLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20)
         ])
+        
+        summaryLabelTopAnchor = summaryLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 20)
+        summaryLabelTopAnchor?.isActive = true
     }
     private func setupCollectionViewConstraints() {
         addSubview(collectionView)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: summaryLabel.bottomAnchor, constant: 20),
+            collectionView.topAnchor.constraint(equalTo: summaryLabel.bottomAnchor, constant: 10),
             collectionView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),
             collectionView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
             collectionView.heightAnchor.constraint(equalToConstant: 300)
@@ -93,8 +83,8 @@ class WeatherSearchView: UIView {
         
         NSLayoutConstraint.activate([
             textField.topAnchor.constraint(equalTo: collectionView.bottomAnchor, constant: 20),
-            textField.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 100),
-            textField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -100),
+            textField.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
+            textField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
             textField.heightAnchor.constraint(equalToConstant: 50)
         ])
     }
