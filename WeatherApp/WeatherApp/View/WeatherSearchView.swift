@@ -74,7 +74,7 @@ class WeatherSearchView: UIView {
             collectionView.topAnchor.constraint(equalTo: summaryLabel.bottomAnchor, constant: 10),
             collectionView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),
             collectionView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
-            collectionView.heightAnchor.constraint(equalToConstant: 300)
+            collectionView.heightAnchor.constraint(equalToConstant: 200)
         ])
     }
     private func setupTextBoxConstraints() {
